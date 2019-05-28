@@ -1,4 +1,4 @@
-// <copyright file="Startup.cs" company="Alexander Steinhauer-Wichmann">
+﻿// <copyright file="Startup.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
@@ -19,7 +19,7 @@ namespace Mergesort_API
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -47,7 +47,8 @@ namespace Mergesort_API
                 c.IncludeXmlComments(filePath);
             });
 
-            services.AddSingleton<IExecutionProvider, ExecutionProvider>();
+            services.AddSingleton<IStorageProvider<Guid, SortingJob>, InMemoryJobStore>();
+            services.AddSingleton<IJobRunner, SortingJobRunner>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
