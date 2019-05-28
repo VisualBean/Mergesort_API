@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,13 +17,30 @@ namespace Mergesort_API.Controllers
             return Ok(new string[] { "value1", "value2" });
         }
 
+        /// <summary>
+        /// Gets the executions by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <response code="200">Execution found.</response>
+        /// <response code="400">Bad id.</response>
+        /// <response code="404">Execution not found.</response>
         [HttpGet("Executions/{id}")]
+        [ProducesResponseType(typeof(Execution),200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> GetExecutionsById(int id)
         {
             return Ok(new string[] { "value1", "value2" });
         }
 
+        /// <summary>
+        /// Gets all executions.
+        /// </summary>
+        /// <response code="200">Executions found.</response>
+        /// <response code="404">No executions found.</response>
         [HttpGet("Executions")]
+        [ProducesResponseType(typeof(IEnumerable<Execution>), 200)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> GetExecutions()
         {
             return Ok(new string[] { "value1", "value2" });
