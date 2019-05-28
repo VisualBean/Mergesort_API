@@ -1,11 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+// <copyright file="MergesortController.cs" company="Alexander Steinhauer-Wichmann">
+// Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
+// </copyright>
 
 namespace Mergesort_API.Controllers
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
     public class MergesortController : ControllerBase

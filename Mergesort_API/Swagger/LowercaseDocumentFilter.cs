@@ -1,9 +1,13 @@
-﻿using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Linq;
+﻿// <copyright file="LowercaseDocumentFilter.cs" company="Alexander Steinhauer-Wichmann">
+// Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
+// </copyright>
 
 namespace Mergesort_API.Swagger
 {
+    using System.Linq;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
+
     public class LowercaseDocumentFilter : IDocumentFilter
     {
         public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)
