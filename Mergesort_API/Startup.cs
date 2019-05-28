@@ -1,4 +1,4 @@
-﻿// <copyright file="Startup.cs" company="Alexander Steinhauer-Wichmann">
+// <copyright file="Startup.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
@@ -31,7 +31,10 @@ namespace Mergesort_API
                 .AddApiExplorer()
                 .AddJsonOptions(o => {
                     o.SerializerSettings.Formatting = Formatting.Indented;
+                    o.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                    o.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 })
+                .AddJsonFormatters()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSwaggerGen(c =>
