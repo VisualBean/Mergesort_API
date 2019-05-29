@@ -6,15 +6,37 @@ namespace Mergesort_API
 {
     using System;
 
+    /// <summary>
+    /// A MergeSorter.
+    /// </summary>
+    /// <seealso cref="Mergesort_API.ISorter{System.Int32}" />
     public class MergeSorter : ISorter<int>
     {
+        /// <summary>
+        /// Sorts the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>A sorted integer array.</returns>
+        /// <exception cref="ArgumentNullException">input - Cannot be null</exception>
         public int[] Sort(int[] input)
         {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input), "Cannot be null");
+            }
+
             var numbers = (int[])input.Clone();
             this.MergeSort(numbers, 0, numbers.Length - 1);
             return numbers;
         }
 
+        /// <summary>
+        /// Merges the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="left">The left.</param>
+        /// <param name="middle">The middle.</param>
+        /// <param name="right">The right.</param>
         private void Merge(int[] input, int left, int middle, int right)
         {
             int[] leftArray = new int[middle - left + 1];
@@ -50,6 +72,12 @@ namespace Mergesort_API
             }
         }
 
+        /// <summary>
+        /// Merges the sort.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
         private void MergeSort(int[] input, int left, int right)
         {
             if (left < right)
