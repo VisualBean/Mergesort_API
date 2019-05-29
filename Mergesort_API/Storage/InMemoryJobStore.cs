@@ -17,13 +17,13 @@ namespace Mergesort_API
             return await Task.FromResult(Jobs.Values);
         }
 
-        public async Task<SortingJob> Retreive(Guid Id)
+        public async Task<SortingJob> GetById(Guid Id)
         {
             Jobs.TryGetValue(Id, out SortingJob job);
             return await Task.FromResult(job);
         }
 
-        public async Task Store(Guid key, SortingJob item)
+        public async Task Save(Guid key, SortingJob item)
         {
             Jobs[key] = item;
             return;

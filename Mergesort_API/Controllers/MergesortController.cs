@@ -39,7 +39,7 @@ namespace Mergesort_API.Controllers
         {
             var job = new SortingJob(Sorter, numbers);
 
-            await this.jobStore.Store(job.Id, job);
+            await this.jobStore.Save(job.Id, job);
             await this.runner.Execute(job);
 
             return this.Accepted(new { job.Id, job.Timestamp, job.Status });
@@ -56,7 +56,7 @@ namespace Mergesort_API.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetExecutionsById(Guid id)
         {
-            var job = await this.jobStore.Retreive(id);
+            var job = await this.jobStore.GetById(id);
             if (job == null)
             {
                 this.logger.LogWarning("Failed to retrieve job for id {0}", id);

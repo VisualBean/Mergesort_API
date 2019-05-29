@@ -10,9 +10,9 @@ namespace Mergesort_API
 
     public interface IStorageProvider<K, T>
     {
-        Task Store(K key, T item);
+        Task Save(K key, T item);
 
-        Task<T> Retreive(K Id);
+        Task<T> GetById(K Id);
 
         Task<IEnumerable<T>> GetAll();
     }
