@@ -31,7 +31,7 @@ namespace Mergesort_API.Controllers
         /// <summary>
         /// Mergesort sorting an array.
         /// </summary>
-        /// <param name="numbers">The numbers.</param>
+        /// <param name="numbers">The array of integers to sort.</param>
         [HttpPost]
         [ProducesResponseType(typeof(Job), 201)]
         [ProducesResponseType(404)]
@@ -48,9 +48,8 @@ namespace Mergesort_API.Controllers
         /// <summary>
         /// Gets the executions by identifier.
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <param name="id">The identifier of the job to retrieve.</param>
         /// <response code="200">Execution found.</response>
-        /// <response code="400">Bad id.</response>
         /// <response code="404">Execution not found.</response>
         [HttpGet("Executions/{id}")]
         [ProducesResponseType(typeof(SortingJob), 200)]
