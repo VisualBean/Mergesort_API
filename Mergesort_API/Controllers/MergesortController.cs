@@ -9,6 +9,7 @@ namespace Mergesort_API.Controllers
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
 
     [Route("api/[controller]")]
     [Produces("application/json")]
@@ -18,11 +19,13 @@ namespace Mergesort_API.Controllers
         private static readonly ISorter<int> Sorter = new MergeSorter();
         private readonly IJobRunner runner;
         private readonly IStorageProvider<Guid, SortingJob> jobStore;
+        private readonly ILogger logger;
 
-        public MergesortController(IJobRunner runner, IStorageProvider<Guid, SortingJob> jobStore)
+        public MergesortController(IJobRunner runner, IStorageProvider<Guid, SortingJob> jobStore, ILogger<MergesortController> logger)
         {
             this.runner = runner;
             this.jobStore = jobStore;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -57,6 +60,7 @@ namespace Mergesort_API.Controllers
             var job = await this.jobStore.Retreive(id);
             if (job == null)
             {
+                this.logger.LogWarning("Failed to retrieve job for id {0}", id);
                 return this.NotFound();
             }
 
@@ -79,6 +83,7 @@ namespace Mergesort_API.Controllers
                  return this.Ok(jobs.Select(job => new { job.Id, job.Timestamp, job.Status }));
             }
 
+            this.logger.LogWarning("No jobs found.");
             return this.NotFound();
         }
 

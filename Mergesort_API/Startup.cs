@@ -1,4 +1,4 @@
-﻿// <copyright file="Startup.cs" company="Alexander Steinhauer-Wichmann">
+// <copyright file="Startup.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
@@ -8,18 +8,24 @@ namespace Mergesort_API
     using System.IO;
     using Mergesort_API.Swagger;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Diagnostics;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using Swashbuckle.AspNetCore.Swagger;
 
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILogger logger;
+
+        public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
             this.Configuration = configuration;
+            this.logger = logger;
         }
 
         public IConfiguration Configuration { get; }
@@ -61,6 +67,20 @@ namespace Mergesort_API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mergesort API");
                 c.RoutePrefix = string.Empty;
             });
+
+            app.UseExceptionHandler(errorBuilder =>
+            {
+                errorBuilder.Run(async context =>
+                {
+                    var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+                    this.logger.LogError("An unhandled exception occured: {0}", exceptionHandlerPathFeature.Error);
+
+                    context.Response.StatusCode = 500;
+                    context.Response.ContentType = "application/json";
+                    await context.Response.WriteAsync("An internal error occurred. Please try again later.");
+                });
+            });
+
             app.UseHttpsRedirection();
 
             app.UseMvc();

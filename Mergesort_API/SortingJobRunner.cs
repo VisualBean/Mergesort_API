@@ -6,12 +6,24 @@ namespace Mergesort_API
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Microsoft.Extensions.Logging;
 
     public class SortingJobRunner : IJobRunner
     {
+        private readonly ILogger logger;
+
+        public SortingJobRunner(ILogger<SortingJobRunner> logger)
+        {
+            this.logger = logger;
+        }
+
         public async Task<Job> Execute(SortingJob job, CancellationToken cancellationToken = default(CancellationToken))
         {
-            Task.Run(() => job.Run(), cancellationToken);
+            Task.Run(
+                () => {
+                this.logger.LogInformation("Beginning execution of job:{0}", job.Id);
+                job.Run();
+            }, cancellationToken);
 
             return job;
         }
