@@ -20,20 +20,10 @@ namespace Mergesort_API.Tests
         }
 
         [Fact]
-        public void Ctor_SetsId()
+        public void Ctor_SetsInitialState()
         {
-            Assert.True(basicJob.Id != Guid.Empty);
-        }
-
-        [Fact]
-        public void Ctor_SetsTimestamp()
-        {
+            Assert.True(basicJob.Id != default(Guid));
             Assert.True(basicJob.Timestamp != default(DateTimeOffset));
-        }
-
-        [Fact]
-        public void Ctor_SetsStatusAsPending()
-        {
             Assert.True(basicJob.Status == Status.Pending);
         }
 
