@@ -24,8 +24,8 @@ namespace Mergesort_API
         /// <param name="input">The input.</param>
         public SortingJob(ISorter<int> sorter, int[] input)
         {
-            this.sorter = sorter;
-            this.Input = input;
+            this.sorter = sorter ?? throw new ArgumentNullException(nameof(sorter), "Sorter cannot be null.");
+            this.Input = input ?? throw new ArgumentNullException(nameof(input), "Array cannot be null.");
         }
 
         /// <summary>
