@@ -5,7 +5,6 @@
 namespace Mergesort_API
 {
     using System;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// A job.

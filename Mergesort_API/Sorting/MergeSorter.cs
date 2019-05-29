@@ -9,7 +9,7 @@ namespace Mergesort_API
     /// <summary>
     /// A MergeSorter.
     /// </summary>
-    /// <seealso cref="Mergesort_API.ISorter{System.Int32}" />
+    /// <seealso cref="Mergesort_API.ISorter{int}" />
     public class MergeSorter : ISorter<int>
     {
         /// <summary>
