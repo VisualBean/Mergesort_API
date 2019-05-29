@@ -5,7 +5,12 @@ VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mergesort_API", "Mergesort_API\Mergesort_API.csproj", "{1E4DEA88-3C62-4BB8-978A-37F760E06690}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mergesort_API.Tests", "Mergesort_API.Tests\Mergesort_API.Tests.csproj", "{41B7A343-41DE-4618-B4F7-5D114AF7BFDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mergesort_API.Tests", "Mergesort_API.Tests\Mergesort_API.Tests.csproj", "{41B7A343-41DE-4618-B4F7-5D114AF7BFDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E5538F61-DA9F-4BE0-9D34-FEC796F49E1D}"
+	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
