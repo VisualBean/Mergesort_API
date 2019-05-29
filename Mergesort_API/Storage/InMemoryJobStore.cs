@@ -25,7 +25,7 @@ namespace Mergesort_API
 
         public async Task Store(Guid key, SortingJob item)
         {
-            Jobs[item.Id] = item;
+            Jobs[key] = item;
             return;
         }
     }
