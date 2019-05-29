@@ -4,15 +4,14 @@
 
 namespace Mergesort_API
 {
+    using System.Threading;
     using System.Threading.Tasks;
 
     public class SortingJobRunner : IJobRunner
     {
-        public async Task<Job> Execute(SortingJob job)
+        public async Task<Job> Execute(SortingJob job, CancellationToken cancellationToken = default(CancellationToken))
         {
-            Task.Factory.StartNew(() => {
-                job.Run();
-            });
+            Task.Run(() => job.Run(), cancellationToken);
 
             return job;
         }
