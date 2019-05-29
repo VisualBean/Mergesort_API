@@ -36,7 +36,7 @@ namespace Mergesort_API.Controllers
             var job = new SortingJob(Sorter, numbers);
 
             await this.jobStore.Store(job.Id, job);
-            this.runner.Execute(job);
+            await this.runner.Execute(job);
 
             return this.Accepted(new { job.Id, job.Timestamp, job.Status });
         }
