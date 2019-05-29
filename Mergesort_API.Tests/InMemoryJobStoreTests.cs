@@ -1,5 +1,6 @@
 using Moq;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -44,6 +45,29 @@ namespace Mergesort_API.Tests
             var job = await store.Retreive(id);
 
             Assert.True(job == null);
+        }
+
+        [Fact]
+        public async Task GetAll_ReturnsAllAdded()
+        {
+            var id = Guid.NewGuid();
+            await store.Store(id, sortingJob);
+
+            id = Guid.NewGuid();
+            await store.Store(id, sortingJob);
+
+            id = Guid.NewGuid();
+            await store.Store(id, sortingJob);
+
+            id = Guid.NewGuid();
+            await store.Store(id, sortingJob);
+
+            id = Guid.NewGuid();
+            await store.Store(id, sortingJob);
+
+            var jobs = await store.GetAll();
+
+            Assert.True(jobs.Count() == 5);
         }
 
     }
