@@ -1,36 +1,52 @@
 using Moq;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using FluentAssertions;
-using System.Collections.Generic;
 
 namespace Mergesort_API.Tests
 {
     public class InMemoryJobStoreTests
     {
         private readonly SortingJob sortingJob;
-        private readonly IStorageProvider<int, SortingJob> store;
+
         public InMemoryJobStoreTests()
         {
             var sorterMock = new Mock<ISorter<int>>();
             sorterMock.Setup(s => s.Sort(Array.Empty<int>())).Returns(Array.Empty<int>()).Verifiable();
             sortingJob = new SortingJob(sorterMock.Object, Array.Empty<int>());
-            store = new InMemoryJobStore();
         }
 
         [Fact]
-        public async Task Save_NullJob_ThrowsNullException()
+        public void Save_NullJob_ThrowsNullException()
         {
+            var store = new InMemoryJobStore();
             Func<Task> act = async () => await store.Save(1, null);
 
             act.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
-        public async Task Save_WithPreexistingKey_ThrowsArgumentException()
+        public async Task Save_RespectsThreads()
         {
+            // Best effort thread test
+
+            var store = new InMemoryJobStore();
+            Parallel.For(0, 100, async (i) =>
+            {
+                await store.Save(IDGenerator.GenerateNewId(), sortingJob);
+            });
+
+            var allItems = await store.GetAll();
+            allItems.Should().NotContainNulls();
+            allItems.Should().HaveCount(100);
+        }
+
+        [Fact]
+        public void Save_WithPreexistingKey_ThrowsArgumentException()
+        {
+            var store = new InMemoryJobStore();
+
             Func<Task> act = async () => await store.Save(1, null);
             Func<Task> act2 = async () => await store.Save(1, null);
             act.Should().Throw<ArgumentException>();
@@ -39,6 +55,7 @@ namespace Mergesort_API.Tests
         [Fact]
         public async Task Retreive_WithExistingKey_RetrievesAtSavedKey()
         {
+            var store = new InMemoryJobStore();
             var id = IDGenerator.GenerateNewId();
 
             await store.Save(id, sortingJob);
@@ -52,6 +69,7 @@ namespace Mergesort_API.Tests
         [Fact]
         public async Task Retreive_WithNonExistantKey_ReturnsNull()
         {
+            var store = new InMemoryJobStore();
             var job = await store.GetById(365);
 
             job.Should().BeNull();
@@ -60,6 +78,7 @@ namespace Mergesort_API.Tests
         [Fact]
         public async Task GetAll_ReturnsAllAdded()
         {
+            var store = new InMemoryJobStore();
             await store.Save(IDGenerator.GenerateNewId(), sortingJob);
 
             await store.Save(IDGenerator.GenerateNewId(), sortingJob);

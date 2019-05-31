@@ -1,16 +1,17 @@
-﻿// <copyright file="ExecutionProvider.cs" company="Alexander Steinhauer-Wichmann">
+﻿// <copyright file="InMemoryJobStore.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
 namespace Mergesort_API
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class InMemoryJobStore : IStorageProvider<int, SortingJob>
     {
-        private static readonly Dictionary<int, SortingJob> Jobs = new Dictionary<int, SortingJob>();
+        private static readonly ConcurrentDictionary<int, SortingJob> Jobs = new ConcurrentDictionary<int, SortingJob>();
 
         public async Task<IEnumerable<SortingJob>> GetAll()
         {
@@ -35,7 +36,10 @@ namespace Mergesort_API
                 throw new ArgumentNullException(nameof(item), "Job cannot be null.");
             }
 
-            Jobs.Add(key, item);
+            if (!Jobs.TryAdd(key, item))
+            {
+                 throw new ArgumentException("Key already exists.");
+            }
         }
     }
 }
