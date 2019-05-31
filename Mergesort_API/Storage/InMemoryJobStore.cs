@@ -37,7 +37,7 @@ namespace Mergesort_API
         /// <returns>A List of <see cref="SortingJob"/></returns>
         public async Task<IEnumerable<SortingJob>> GetAll()
         {
-            return await Task.FromResult(jobs.Values);
+            return await Task.FromResult(this.jobs.Values);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Mergesort_API
         /// <returns>A <see cref="SortingJob"/></returns>
         public async Task<SortingJob> GetById(int id)
         {
-            if (!jobs.TryGetValue(id, out SortingJob job))
+            if (!this.jobs.TryGetValue(id, out SortingJob job))
             {
                 this.logger.LogWarning($"Job with id: {id} not found.");
             }
@@ -76,7 +76,7 @@ namespace Mergesort_API
                 throw new ArgumentNullException(nameof(item), "Job cannot be null.");
             }
 
-            if (!jobs.TryAdd(key, item))
+            if (!this.jobs.TryAdd(key, item))
             {
                  throw new ArgumentException("Key already exists.");
             }
