@@ -1,4 +1,4 @@
-// <copyright file="Execution.cs" company="Alexander Steinhauer-Wichmann">
+﻿// <copyright file="Execution.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
@@ -53,7 +53,7 @@ namespace Mergesort_API
         /// <summary>
         /// run this instance.
         /// </summary>
-        public void Run()
+        public virtual void Run()
         {
             this.Work();
             this.Status = Status.Completed;
