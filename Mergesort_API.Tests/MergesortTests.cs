@@ -1,3 +1,4 @@
+using FluentAssertions;
 using System;
 using Xunit;
 
@@ -12,23 +13,23 @@ namespace Mergesort_API.Tests
             sorter = new MergeSorter();
         }
         [Fact]
-        public void Sort_SortsAnArrayAscending()
+        public void Sort_WithArray_SortsArrayAscending()
         {
             var input = new int[] { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
             var expected = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             var output = sorter.Sort(input);
 
-            Assert.Equal(expected, output);
+            output.Should().BeInAscendingOrder();
+            output.Should().NotBeSameAs(expected);
         }
 
         [Fact]
-        public void Sort_EmptyInput_DoesNotThrow()
+        public void Sort_WithEmptyArray_SortsArray()
         {
-            var input = new int[0];
-
+            var input = Array.Empty<int>();
             var output = sorter.Sort(input);
 
-            Assert.True(true);
+            output.Should().BeSameAs(output);
         }
 
         [Fact]
@@ -36,7 +37,9 @@ namespace Mergesort_API.Tests
         {
             int[] input = null;
 
-            Assert.Throws<ArgumentNullException>(() => sorter.Sort(input));
+            Action sort = () => sorter.Sort(input);
+
+            sort.Should().Throw<ArgumentNullException>();
         }
     }
 }
