@@ -36,7 +36,8 @@ namespace Mergesort_API
         {
             services.AddMvcCore()
                 .AddApiExplorer()
-                .AddJsonOptions(o => {
+                .AddJsonOptions(o =>
+                {
                     o.SerializerSettings.Formatting = Formatting.Indented;
                     o.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
                     o.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -63,7 +64,8 @@ namespace Mergesort_API
             app.UseHsts();
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mergesort API");
                 c.RoutePrefix = string.Empty;
             });

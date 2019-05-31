@@ -4,9 +4,9 @@
 
 namespace Mergesort_API
 {
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
-    using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
     public class Program

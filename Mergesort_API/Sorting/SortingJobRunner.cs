@@ -20,7 +20,8 @@ namespace Mergesort_API
         public async Task Execute(SortingJob job, CancellationToken cancellationToken = default(CancellationToken))
         {
             Task.Run(
-                () => {
+                () =>
+                {
                 this.logger.LogInformation("Beginning execution of job:{0}", job.Id);
                 job.Run();
             }, cancellationToken);
