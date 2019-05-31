@@ -1,4 +1,4 @@
-// <copyright file="IDGenerator.cs" company="Alexander Steinhauer-Wichmann">
+﻿// <copyright file="IDGenerator.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
