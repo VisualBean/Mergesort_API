@@ -17,15 +17,13 @@ namespace Mergesort_API
             this.logger = logger;
         }
 
-        public async Task<Job> Execute(SortingJob job, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task Execute(SortingJob job, CancellationToken cancellationToken = default(CancellationToken))
         {
             Task.Run(
                 () => {
                 this.logger.LogInformation("Beginning execution of job:{0}", job.Id);
                 job.Run();
             }, cancellationToken);
-
-            return job;
         }
     }
 }

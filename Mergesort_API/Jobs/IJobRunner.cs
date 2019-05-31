@@ -9,6 +9,6 @@ namespace Mergesort_API
 
     public interface IJobRunner
     {
-        Task<Job> Execute(SortingJob job,  CancellationToken cancellationToken = default(CancellationToken));
+        Task Execute(SortingJob job,  CancellationToken cancellationToken = default(CancellationToken));
     }
 }
