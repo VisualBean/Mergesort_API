@@ -9,12 +9,12 @@ A windows machine.
 I highly encourage you to open a terminal in the project location.
 
 ### Build
-run `\.build.ps1` in the project folder.  
+run `.\build.ps1` from the root of the project, either in your terminal of choice or run the powershell script directly (right click -> Run in powershell). 
 The script, builds the solution, runs the tests and publishes the release version of the service.  
 The release version is published to `Mergesort_API\bin\Release\netcoreapp2.2\win-x64`
 
 ### Run
-run ```\.run.ps1``` in your terminal of choice or run the powershell script directly (right click -> Run in powershell).
+run ```.\run.ps1``` from the root of the project, either in your terminal of choice or run the powershell script directly (right click -> Run in powershell).
 This will run the service in the console as a selfhosted api.
 
 ## Using it
