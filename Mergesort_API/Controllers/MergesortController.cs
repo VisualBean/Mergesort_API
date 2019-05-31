@@ -18,10 +18,10 @@ namespace Mergesort_API.Controllers
     {
         private static readonly ISorter<int> Sorter = new MergeSorter();
         private readonly IJobRunner runner;
-        private readonly IStorageProvider<Guid, SortingJob> jobStore;
+        private readonly IStorageProvider<int, SortingJob> jobStore;
         private readonly ILogger logger;
 
-        public MergesortController(IJobRunner runner, IStorageProvider<Guid, SortingJob> jobStore, ILogger<MergesortController> logger)
+        public MergesortController(IJobRunner runner, IStorageProvider<int, SortingJob> jobStore, ILogger<MergesortController> logger)
         {
             this.runner = runner;
             this.jobStore = jobStore;
@@ -54,7 +54,7 @@ namespace Mergesort_API.Controllers
         [HttpGet("Executions/{id}")]
         [ProducesResponseType(typeof(SortingJob), 200)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetExecutionsById(Guid id)
+        public async Task<IActionResult> GetExecutionsById(int id)
         {
             var job = await this.jobStore.GetById(id);
             if (job == null)

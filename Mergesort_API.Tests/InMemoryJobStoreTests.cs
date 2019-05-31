@@ -3,71 +3,63 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using FluentAssertions;
+using System.Collections.Generic;
 
 namespace Mergesort_API.Tests
 {
     public class InMemoryJobStoreTests
     {
-        private readonly IStorageProvider<Guid, SortingJob> store;
         private readonly SortingJob sortingJob;
-
+        private readonly IStorageProvider<int, SortingJob> store;
         public InMemoryJobStoreTests()
         {
-            store = new InMemoryJobStore();
-
             var sorterMock = new Mock<ISorter<int>>();
-            sorterMock.Setup(s => s.Sort(new int[0])).Returns(new int[0]).Verifiable();
-            sortingJob = new SortingJob(sorterMock.Object, new int[0]);
+            sorterMock.Setup(s => s.Sort(Array.Empty<int>())).Returns(Array.Empty<int>()).Verifiable();
+            sortingJob = new SortingJob(sorterMock.Object, Array.Empty<int>());
+            store = new InMemoryJobStore();
         }
 
         [Fact]
-        public void Store_NullJob_DoesNotStoreJob()
+        public async Task Save_NullJob_ThrowsNullException()
         {
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await store.Store(Guid.NewGuid(), null));
+            Func<Task> act = async () => await store.Save(1, null);
+
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
-        public async Task Retreive_ValidKey_RetrievesAtSavedKey()
+        public async Task Retreive_WithExistingKey_RetrievesAtSavedKey()
         {
-            var id = Guid.NewGuid();
+            var id = IDGenerator.GenerateNewId();
 
-            await store.Store(id, sortingJob);
-            var job = await store.Retreive(id);
+            await store.Save(id, sortingJob);
+            var job = await store.GetById(id);
 
-            Assert.Same(sortingJob, job);
+            job.Should().NotBeNull();
+            job.Should().BeOfType(typeof(SortingJob));
+            job.Should().BeSameAs(sortingJob);
         }
 
         [Fact]
-        public async Task Retreive_GetNonExistentId_ReturnsNull()
+        public async Task Retreive_WithNonExistantKey_ReturnsNull()
         {
-            var id = Guid.NewGuid();
+            var job = await store.GetById(365);
 
-            var job = await store.Retreive(id);
-
-            Assert.True(job == null);
+            job.Should().BeNull();
         }
 
         [Fact]
         public async Task GetAll_ReturnsAllAdded()
         {
-            var id = Guid.NewGuid();
-            await store.Store(id, sortingJob);
+            await store.Save(IDGenerator.GenerateNewId(), sortingJob);
 
-            id = Guid.NewGuid();
-            await store.Store(id, sortingJob);
-
-            id = Guid.NewGuid();
-            await store.Store(id, sortingJob);
-
-            id = Guid.NewGuid();
-            await store.Store(id, sortingJob);
-
-            id = Guid.NewGuid();
-            await store.Store(id, sortingJob);
+            await store.Save(IDGenerator.GenerateNewId(), sortingJob);
 
             var jobs = await store.GetAll();
 
-            Assert.True(jobs.Count() == 5);
+            jobs.Should().HaveCount(2);
+            jobs.Should().NotContainNulls();
         }
 
     }

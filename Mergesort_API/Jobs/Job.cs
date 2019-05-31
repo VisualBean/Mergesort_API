@@ -1,4 +1,4 @@
-﻿// <copyright file="Execution.cs" company="Alexander Steinhauer-Wichmann">
+// <copyright file="Execution.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
@@ -16,7 +16,7 @@ namespace Mergesort_API
         /// </summary>
         public Job()
         {
-            this.Id = Guid.NewGuid();
+            this.Id = IDGenerator.GenerateNewId();
             this.Timestamp = DateTime.UtcNow;
             this.Status = Status.Pending;
         }
@@ -27,7 +27,7 @@ namespace Mergesort_API
         /// <value>
         /// The identifier.
         /// </value>
-        public Guid Id { get; }
+        public int Id { get; }
 
         /// <summary>
         /// Gets the timestamp.

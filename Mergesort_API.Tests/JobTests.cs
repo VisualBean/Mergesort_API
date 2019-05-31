@@ -3,14 +3,6 @@ using Xunit;
 
 namespace Mergesort_API.Tests
 {
-    public class BasicJob : Job
-    {
-        public override void Work()
-        {
-            //Do nothing
-        }
-    }
-
     public class JobTests
     {
         private readonly Job basicJob;
@@ -20,11 +12,11 @@ namespace Mergesort_API.Tests
         }
 
         [Fact]
-        public void Ctor_SetsInitialState()
+        public void Job_WhenCreated_SetsInitialState()
         {
-            Assert.True(basicJob.Id != default(Guid));
+            Assert.True(basicJob.Id > 0);
             Assert.True(basicJob.Timestamp != default(DateTimeOffset));
-            Assert.True(basicJob.Status == Status.Pending);
+            Assert.Equal(Status.Pending, basicJob.Status);
         }
 
         [Fact]
