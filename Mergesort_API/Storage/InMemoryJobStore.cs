@@ -13,14 +13,18 @@ namespace Mergesort_API
     /// <summary>
     /// The In memory job store.
     /// </summary>
-    /// <seealso cref="Mergesort_API.IStorageProvider{int, Mergesort_API.SortingJob}" />
+    /// <seealso cref="Mergesort_API.IStorageProvider{K, T}" />
     public class InMemoryJobStore : IStorageProvider<int, SortingJob>
     {
+        /// <summary>
+        /// The logger.
+        /// </summary>
+        private readonly ILogger<InMemoryJobStore> logger;
+
         /// <summary>
         /// The memory storage.
         /// </summary>
         private ConcurrentDictionary<int, SortingJob> jobs = new ConcurrentDictionary<int, SortingJob>();
-        private readonly ILogger<InMemoryJobStore> logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InMemoryJobStore"/> class.
@@ -34,7 +38,7 @@ namespace Mergesort_API
         /// <summary>
         /// Gets all.
         /// </summary>
-        /// <returns>A List of <see cref="SortingJob"/></returns>
+        /// <returns>A List of <see cref="SortingJob"/>.</returns>
         public async Task<IEnumerable<SortingJob>> GetAll()
         {
             return await Task.FromResult(this.jobs.Values);
@@ -44,7 +48,7 @@ namespace Mergesort_API
         /// Gets the by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns>A <see cref="SortingJob"/></returns>
+        /// <returns>A <see cref="SortingJob"/>.</returns>
         public async Task<SortingJob> GetById(int id)
         {
             if (!this.jobs.TryGetValue(id, out SortingJob job))

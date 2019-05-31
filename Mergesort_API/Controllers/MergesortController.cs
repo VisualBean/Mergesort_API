@@ -90,6 +90,5 @@ namespace Mergesort_API.Controllers
             this.logger.LogWarning("No jobs found.");
             return this.NotFound();
         }
-
     }
 }

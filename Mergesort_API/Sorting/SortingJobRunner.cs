@@ -1,4 +1,4 @@
-﻿// <copyright file="ExecutionProvider.cs" company="Alexander Steinhauer-Wichmann">
+﻿// <copyright file="SortingJobRunner.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
@@ -9,13 +9,17 @@ namespace Mergesort_API
     using Microsoft.Extensions.Logging;
 
     /// <summary>
-    /// The Sorting Job Runner
+    /// The Sorting Job Runner.
     /// </summary>
     /// <seealso cref="Mergesort_API.IJobRunner" />
     public class SortingJobRunner : IJobRunner
     {
         private readonly ILogger logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SortingJobRunner"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
         public SortingJobRunner(ILogger<SortingJobRunner> logger)
         {
             this.logger = logger;

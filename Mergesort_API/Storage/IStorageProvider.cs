@@ -8,11 +8,11 @@ namespace Mergesort_API
     using System.Threading.Tasks;
 
     /// <summary>
-    /// The storageprovider interface
+    /// The storageprovider interface.
     /// </summary>
-    /// <typeparam name="K"></typeparam>
-    /// <typeparam name="T"></typeparam>
-    public interface IStorageProvider<K, T>
+    /// <typeparam name="TKey">The Key type.</typeparam>
+    /// <typeparam name="TItem">The stored item type.</typeparam>
+    public interface IStorageProvider<TKey, TItem>
     {
         /// <summary>
         /// Saves the specified key.
@@ -20,19 +20,19 @@ namespace Mergesort_API
         /// <param name="key">The key.</param>
         /// <param name="item">The item.</param>
         /// <returns>A Task.</returns>
-        Task Save(K key, T item);
+        Task Save(TKey key, TItem item);
 
         /// <summary>
         /// Gets the by identifier.
         /// </summary>
-        /// <param name="Id">The identifier.</param>
-        /// <returns>A <see cref="{T}"/>.</returns>
-        Task<T> GetById(K Id);
+        /// <param name="id">The identifier.</param>
+        /// <returns>A Task.</returns>
+        Task<TItem> GetById(TKey id);
 
         /// <summary>
         /// Gets all.
         /// </summary>
-        /// <returns>A List of <see cref="{T}"/></returns>
-        Task<IEnumerable<T>> GetAll();
+        /// <returns>A <see cref="IEnumerable{T}"/>.</returns>
+        Task<IEnumerable<TItem>> GetAll();
     }
 }

@@ -29,16 +29,7 @@ namespace Mergesort_API
         }
 
         /// <summary>
-        /// Work that is to be done as part of the job execution.
-        /// </summary>
-        public override void Work()
-        {
-            this.Output = this.sorter.Sort(this.Input);
-            this.Duration = DateTime.UtcNow - this.Timestamp;
-        }
-
-        /// <summary>
-        /// Gets or sets the duration.
+        /// Gets the duration.
         /// </summary>
         /// <value>
         /// The duration.
@@ -46,7 +37,7 @@ namespace Mergesort_API
         public TimeSpan Duration { get; private set; }
 
         /// <summary>
-        /// Gets or sets the input.
+        /// Gets the input.
         /// </summary>
         /// <value>
         /// The input.
@@ -54,12 +45,20 @@ namespace Mergesort_API
         public int[] Input { get; private set; }
 
         /// <summary>
-        /// Gets or sets the output.
+        /// Gets the output.
         /// </summary>
         /// <value>
         /// The output.
         /// </value>
         public int[] Output { get; private set; }
 
+        /// <summary>
+        /// Work that is to be done as part of the job execution.
+        /// </summary>
+        public override void Work()
+        {
+            this.Output = this.sorter.Sort(this.Input);
+            this.Duration = DateTime.UtcNow - this.Timestamp;
+        }
     }
 }

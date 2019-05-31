@@ -9,7 +9,7 @@ namespace Mergesort_API
     /// <summary>
     /// A MergeSorter.
     /// </summary>
-    /// <seealso cref="Mergesort_API.ISorter{int}" />
+    /// <seealso cref="Mergesort_API.ISorter{T}" />
     public class MergeSorter : ISorter<int>
     {
         /// <summary>
@@ -17,7 +17,7 @@ namespace Mergesort_API
         /// </summary>
         /// <param name="input">The input.</param>
         /// <returns>A sorted integer array.</returns>
-        /// <exception cref="ArgumentNullException">input - Cannot be null</exception>
+        /// <exception cref="ArgumentNullException">input - Cannot be null.</exception>
         public int[] Sort(int[] input)
         {
             if (input == null)

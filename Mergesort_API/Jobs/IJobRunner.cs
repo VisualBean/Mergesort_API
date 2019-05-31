@@ -1,4 +1,4 @@
-﻿// <copyright file="JobRunner.cs" company="Alexander Steinhauer-Wichmann">
+﻿// <copyright file="IJobRunner.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
