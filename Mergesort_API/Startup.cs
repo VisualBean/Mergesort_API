@@ -83,8 +83,6 @@ namespace Mergesort_API
                 });
             });
 
-            app.UseHttpsRedirection();
-
             app.UseMvc();
         }
     }
