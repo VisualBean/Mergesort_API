@@ -1,4 +1,8 @@
-﻿namespace Mergesort_API
+﻿// <copyright file="ISorter.cs" company="Alexander Steinhauer-Wichmann">
+// Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
+// </copyright>
+
+namespace Mergesort_API
 {
     /// <summary>
     /// The Sorter interface.

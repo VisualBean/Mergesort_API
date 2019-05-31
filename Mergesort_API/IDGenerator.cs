@@ -19,7 +19,7 @@ namespace Mergesort_API
         /// <summary>
         /// Generates the new identifier.
         /// </summary>
-        /// <returns>A <see cref="int"/></returns>
+        /// <returns>A <see cref="int"/>.</returns>
         public static int GenerateNewId()
         {
             return Interlocked.Increment(ref currentID);
