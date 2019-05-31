@@ -8,17 +8,28 @@ namespace Mergesort_API
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Microsoft.Extensions.Logging;
 
     /// <summary>
     /// The In memory job store.
     /// </summary>
-    /// <seealso cref="Mergesort_API.IStorageProvider{System.Int32, Mergesort_API.SortingJob}" />
+    /// <seealso cref="Mergesort_API.IStorageProvider{int, Mergesort_API.SortingJob}" />
     public class InMemoryJobStore : IStorageProvider<int, SortingJob>
     {
         /// <summary>
         /// The memory storage.
         /// </summary>
         private static readonly ConcurrentDictionary<int, SortingJob> Jobs = new ConcurrentDictionary<int, SortingJob>();
+        private readonly ILogger<InMemoryJobStore> logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InMemoryJobStore"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        public InMemoryJobStore(ILogger<InMemoryJobStore> logger)
+        {
+            this.logger = logger;
+        }
 
         /// <summary>
         /// Gets all.
@@ -32,11 +43,15 @@ namespace Mergesort_API
         /// <summary>
         /// Gets the by identifier.
         /// </summary>
-        /// <param name="Id">The identifier.</param>
+        /// <param name="id">The identifier.</param>
         /// <returns>A <see cref="SortingJob"/></returns>
-        public async Task<SortingJob> GetById(int Id)
+        public async Task<SortingJob> GetById(int id)
         {
-            Jobs.TryGetValue(Id, out SortingJob job);
+            if (!Jobs.TryGetValue(id, out SortingJob job))
+            {
+                this.logger.LogWarning($"Job with id: {id} not found.");
+            }
+
             return await Task.FromResult(job);
         }
 
@@ -65,6 +80,8 @@ namespace Mergesort_API
             {
                  throw new ArgumentException("Key already exists.");
             }
+
+            this.logger.LogInformation("Saved job with id {0}", key);
         }
     }
 }
