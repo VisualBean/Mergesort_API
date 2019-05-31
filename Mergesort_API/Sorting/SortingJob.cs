@@ -1,4 +1,4 @@
-﻿// <copyright file="Execution.cs" company="Alexander Steinhauer-Wichmann">
+﻿// <copyright file="SortingJob.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
