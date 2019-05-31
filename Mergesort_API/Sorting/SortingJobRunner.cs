@@ -8,6 +8,10 @@ namespace Mergesort_API
     using System.Threading.Tasks;
     using Microsoft.Extensions.Logging;
 
+    /// <summary>
+    /// The Sorting Job Runner
+    /// </summary>
+    /// <seealso cref="Mergesort_API.IJobRunner" />
     public class SortingJobRunner : IJobRunner
     {
         private readonly ILogger logger;
@@ -17,6 +21,12 @@ namespace Mergesort_API
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Executes the specified job.
+        /// </summary>
+        /// <param name="job">The job.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A Task.</returns>
         public async Task Execute(SortingJob job, CancellationToken cancellationToken = default(CancellationToken))
         {
             Task.Run(

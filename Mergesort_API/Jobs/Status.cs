@@ -10,12 +10,12 @@ namespace Mergesort_API
     public enum Status
     {
         /// <summary>
-        /// The pending
+        /// The pending status.
         /// </summary>
         Pending,
 
         /// <summary>
-        /// The completed
+        /// The completed status.
         /// </summary>
         Completed,
     }

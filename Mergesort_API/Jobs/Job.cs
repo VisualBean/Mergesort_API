@@ -25,7 +25,7 @@ namespace Mergesort_API
         /// Gets the identifier.
         /// </summary>
         /// <value>
-        /// The identifier.
+        /// The job identifier.
         /// </value>
         public int Id { get; }
 
