@@ -1,4 +1,4 @@
-﻿// <copyright file="IDGenerator.cs" company="Alexander Steinhauer-Wichmann">
+// <copyright file="IDGenerator.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
@@ -8,7 +8,7 @@ namespace Mergesort_API
 
     public static class IDGenerator
     {
-        private static int currentID = 1;
+        private static int currentID = 0;
 
         public static int GenerateNewId()
         {
