@@ -29,6 +29,14 @@ namespace Mergesort_API.Tests
         }
 
         [Fact]
+        public async Task Save_WithPreexistingKey_ThrowsArgumentException()
+        {
+            Func<Task> act = async () => await store.Save(1, null);
+            Func<Task> act2 = async () => await store.Save(1, null);
+            act.Should().Throw<ArgumentException>();
+        }
+
+        [Fact]
         public async Task Retreive_WithExistingKey_RetrievesAtSavedKey()
         {
             var id = IDGenerator.GenerateNewId();
