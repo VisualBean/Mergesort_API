@@ -19,7 +19,7 @@ namespace Mergesort_API
         /// <summary>
         /// The memory storage.
         /// </summary>
-        private static readonly ConcurrentDictionary<int, SortingJob> Jobs = new ConcurrentDictionary<int, SortingJob>();
+        private ConcurrentDictionary<int, SortingJob> jobs = new ConcurrentDictionary<int, SortingJob>();
         private readonly ILogger<InMemoryJobStore> logger;
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Mergesort_API
         /// <returns>A List of <see cref="SortingJob"/></returns>
         public async Task<IEnumerable<SortingJob>> GetAll()
         {
-            return await Task.FromResult(Jobs.Values);
+            return await Task.FromResult(jobs.Values);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Mergesort_API
         /// <returns>A <see cref="SortingJob"/></returns>
         public async Task<SortingJob> GetById(int id)
         {
-            if (!Jobs.TryGetValue(id, out SortingJob job))
+            if (!jobs.TryGetValue(id, out SortingJob job))
             {
                 this.logger.LogWarning($"Job with id: {id} not found.");
             }
@@ -76,7 +76,7 @@ namespace Mergesort_API
                 throw new ArgumentNullException(nameof(item), "Job cannot be null.");
             }
 
-            if (!Jobs.TryAdd(key, item))
+            if (!jobs.TryAdd(key, item))
             {
                  throw new ArgumentException("Key already exists.");
             }
