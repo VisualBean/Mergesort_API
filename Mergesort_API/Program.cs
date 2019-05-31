@@ -6,7 +6,9 @@ namespace Mergesort_API
 {
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public class Program
     {
         public static void Main(string[] args)

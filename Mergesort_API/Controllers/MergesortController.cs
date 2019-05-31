@@ -6,6 +6,7 @@ namespace Mergesort_API.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ namespace Mergesort_API.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
+    [ExcludeFromCodeCoverage]
     public class MergesortController : ControllerBase
     {
         private static readonly ISorter<int> Sorter = new MergeSorter();
@@ -32,6 +34,7 @@ namespace Mergesort_API.Controllers
         /// Mergesort sorting an array.
         /// </summary>
         /// <param name="numbers">The array of integers to sort.</param>
+        /// <response code="201">Sorting execution accepted.</response>
         [HttpPost]
         [ProducesResponseType(typeof(Job), 201)]
         [ProducesResponseType(404)]

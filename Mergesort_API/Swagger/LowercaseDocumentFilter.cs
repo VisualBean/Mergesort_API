@@ -4,10 +4,12 @@
 
 namespace Mergesort_API.Swagger
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
+    [ExcludeFromCodeCoverage]
     public class LowercaseDocumentFilter : IDocumentFilter
     {
         public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)

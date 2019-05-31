@@ -1,10 +1,11 @@
-// <copyright file="Startup.cs" company="Alexander Steinhauer-Wichmann">
+﻿// <copyright file="Startup.cs" company="Alexander Steinhauer-Wichmann">
 // Copyright (c) Alexander Steinhauer-Wichmann. All rights reserved.
 // </copyright>
 
 namespace Mergesort_API
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using Mergesort_API.Swagger;
     using Microsoft.AspNetCore.Builder;
@@ -18,6 +19,7 @@ namespace Mergesort_API
     using Newtonsoft.Json;
     using Swashbuckle.AspNetCore.Swagger;
 
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         private readonly ILogger logger;
