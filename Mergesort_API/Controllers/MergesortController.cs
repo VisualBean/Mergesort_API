@@ -4,7 +4,6 @@
 
 namespace Mergesort_API.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -35,6 +34,7 @@ namespace Mergesort_API.Controllers
         /// </summary>
         /// <param name="numbers">The array of integers to sort.</param>
         /// <response code="201">Sorting execution accepted.</response>
+        /// <returns>A <see cref="Job"/> representing the work to being done.</returns>
         [HttpPost]
         [ProducesResponseType(typeof(Job), 201)]
         [ProducesResponseType(404)]
@@ -54,6 +54,7 @@ namespace Mergesort_API.Controllers
         /// <param name="id">The identifier of the job to retrieve.</param>
         /// <response code="200">Execution found.</response>
         /// <response code="404">Execution not found.</response>
+        /// <returns>A <see cref="SortingJob"/> representing the work being done.</returns>
         [HttpGet("Executions/{id}")]
         [ProducesResponseType(typeof(SortingJob), 200)]
         [ProducesResponseType(404)]
@@ -74,6 +75,7 @@ namespace Mergesort_API.Controllers
         /// </summary>
         /// <response code="200">Executions found.</response>
         /// <response code="404">No executions found.</response>
+        /// <returns>A <see cref="IEnumerable{Job}"/> A list of all jobs that have run and are running.</returns>
         [HttpGet("Executions")]
         [ProducesResponseType(typeof(IEnumerable<Job>), 200)]
         [ProducesResponseType(404)]
