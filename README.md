@@ -1,3 +1,6 @@
+# Yet another timed challenge
+Mostly to show off coding style.
+
 # Mergesort_API
 Please clone or download the project.
 
