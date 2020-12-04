@@ -1,6 +1,9 @@
 # Yet another timed challenge
 Mostly to show off coding style.
 
+## Description
+Create an API to Sort integer arrays. Arrays should be sorted as part of a jobrunner, and the controller should give back an ID of a job, that can then be looked up for status and result.
+
 # Mergesort_API
 Please clone or download the project.
 
